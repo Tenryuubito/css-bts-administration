@@ -48,3 +48,13 @@ C:\Users\smara\Source\Repos\css-bts-administration\css-bts-administration\bin\De
 C:\Users\smara\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\smara\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\smara\Source\Repos\css-bts-administration\css-bts-administration\obj\Debug\net6.0-windows\css-bts-administration.csproj.CopyComplete
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\obj\Debug\net6.0-windows\css-bts-administration.csproj.AssemblyReference.cache
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\EntityFramework.SqlServer.dll
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\EntityFramework.dll
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Erik\Source\Repos\css-bts-administration\css-bts-administration\obj\Debug\net6.0-windows\css-bts-administration.csproj.CopyComplete
