@@ -15,14 +15,14 @@
         <Border BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox MinWidth="200"></TextBox>
-                    <Button>Suchen</Button>
+                    <TextBox MinWidth="200" Name="input"></TextBox>
+                    <Button Click="OnClick_searchMember">Suchen</Button>
                 </StackPanel>
                 <Button Click="OnClick_addNewMember" Padding="13" Margin="5">Mitarbeiter hinzufügen</Button>
-                <Button Padding="13" Margin="5">Mitarbeiter bearbeiten</Button>
-                <Button Padding="13" Margin="5">Mitarbeiter löschen</Button>
-                <Button Padding="13" Margin="5">Mitarbeiter exportieren</Button>
-                <Button Padding="13" Margin="5">Mitarbeiter importieren</Button>
+                <Button Click="OnClick_editMember" Padding="13" Margin="5">Mitarbeiter bearbeiten</Button>
+                <Button Click="OnClick_deleteMember" Padding="13" Margin="5">Mitarbeiter löschen</Button>
+                <Button Click="OnClick_exportMembers" Padding="13" Margin="5">Mitarbeiter exportieren</Button>
+                <Button Click="OnClick_importMembers" Padding="13" Margin="5">Mitarbeiter importieren</Button>
             </StackPanel>
         </Border>
 

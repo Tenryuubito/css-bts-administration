@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace css_bts_administration
 {
-    class EmployeeContext: DbCon
+    class EmployeeContext
     {
 
 

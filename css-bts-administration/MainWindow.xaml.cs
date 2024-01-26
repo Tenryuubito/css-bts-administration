@@ -20,6 +20,8 @@ namespace css_bts_administration
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +30,33 @@ namespace css_bts_administration
         public void OnClick_addNewMember(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Button funktioniert");
-;        }
+        }
+
+        public void OnClick_editMember(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Button funktioniert");
+        }
+
+        public void OnClick_deleteMember(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Button funktioniert");
+        }
+
+        public void OnClick_exportMembers(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Button funktioniert");
+        }
+
+        public void OnClick_importMembers(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Button funktioniert");
+        }
+
+        public void OnClick_searchMember(object sender, RoutedEventArgs e)
+        {
+            string var1;
+            var1 = input.Text;
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
