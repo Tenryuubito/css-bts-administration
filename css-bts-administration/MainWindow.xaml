@@ -19,7 +19,7 @@
                     <Button>Suchen</Button>
                 </StackPanel>
                 <Button Click="OnClick_addNewMember" Padding="13" Margin="5">Mitarbeiter hinzufügen</Button>
-                <Button Padding="13" Margin="5">Mitarbeiter bearbeiten</Button>
+                <Button Click="OnClick_editMember" Padding="13" Margin="5">Mitarbeiter bearbeiten</Button>
                 <Button Padding="13" Margin="5">Mitarbeiter löschen</Button>
                 <Button Padding="13" Margin="5">Mitarbeiter exportieren</Button>
                 <Button Padding="13" Margin="5">Mitarbeiter importieren</Button>

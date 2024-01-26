@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace css_bts_administration
     /// </summary>
     public partial class MainWindow : Window
     {
+        EmployeeContext context = new EmployeeContext();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,12 +30,27 @@ namespace css_bts_administration
 
         public void OnClick_addNewMember(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Button funktioniert");
-;        }
+            context = new EmployeeContext();
+            Employee employee = new Employee();
+            employee.FirstName = "Test";
+            employee.LastName = "Test";
+            employee.PhoneNumber = "Test";
+            employee.Salary = 12.34f;
+            employee.Position = "Test";
+            employee.Address = "Test";
+            employee.Email = "Test";
+            employee.CompanyEntry = 242424242;
+            employee.PensionStart = 3525141414;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+            context.Employees.Add(employee);
+            context.SaveChanges();
+            MessageBox.Show("Add new Member completed.");
+        }
+
+        private void OnClick_editMember(object sender, RoutedEventArgs e)
         {
-
+            foreach (Employee employee in context.Employees)
+                MessageBox.Show(employee.Email);
         }
     }
 
