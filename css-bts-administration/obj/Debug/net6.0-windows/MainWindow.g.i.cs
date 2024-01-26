@@ -50,11 +50,9 @@ namespace css_bts_administration
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.12.0")]
-        public void InitializeComponent()
-        {
-            if (_contentLoaded)
-            {
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.4.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
                 return;
             }
             _contentLoaded = true;
@@ -68,7 +66,7 @@ namespace css_bts_administration
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.12.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.4.0")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
@@ -77,6 +75,22 @@ namespace css_bts_administration
         {
             switch (connectionId)
             {
+            case 1:
+            
+            #line 21 "..\..\..\MainWindow.xaml"
+            ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.OnClick_addNewMember);
+            
+            #line default
+            #line hidden
+            return;
+            case 2:
+            
+            #line 22 "..\..\..\MainWindow.xaml"
+            ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.OnClick_editMember);
+            
+            #line default
+            #line hidden
+            return;
                 case 1:
 
 #line 19 "..\..\..\MainWindow.xaml"
