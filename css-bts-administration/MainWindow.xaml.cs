@@ -35,24 +35,13 @@ namespace css_bts_administration
 
         public void OnClick_addNewMember(object sender, RoutedEventArgs e)
         {
-            context = new EmployeeContext();
-            Employee employee = new Employee();
-            employee.FirstName = "Test";
-            employee.LastName = "Test";
-            employee.PhoneNumber = "Test";
-            employee.Salary = 12.34f;
-            employee.Position = "Test";
-            employee.Address = "Test";
-            employee.Email = "Test";
-            employee.CompanyEntry = 242424242;
-            employee.PensionStart = 3525141414;
-
-            context.Employees.Add(employee);
-            context.SaveChanges();
-
-            EmployeeListView.Items.Add(employee);
-
-            MessageBox.Show("Add new Member completed.");
+            EmployeeListView.Visibility = Visibility.Collapsed;
+            EmployeeForm.Visibility = Visibility.Visible;
+            
+            
+            
+            EmployeeListView.Visibility = Visibility.Visible;
+            EmployeeForm.Visibility = Visibility.Collapsed;
         }
 
 
