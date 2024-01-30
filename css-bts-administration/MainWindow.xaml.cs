@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -73,7 +74,19 @@ namespace css_bts_administration
 
         public void OnClick_searchMember(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Button funktioniert");
+            string text = input.Text; 
+            var found_employees = from b in context.Employees
+                where b.FirstName.Contains(text) || b.LastName.Contains(text) || b.Address.Contains(text) || b.Salary.ToString().Contains(text) || b.Email.Contains(text)
+                || b.Position.Contains(text) || b.CompanyEntry.ToString().Contains(text) || b.PhoneNumber.Contains(text) || b.CompanyEntry.ToString().Contains(text) ||
+                b.PensionStart.ToString().Contains(text)
+                select b;
+
+            EmployeeListView.Items.Clear();
+            foreach (Employee employee in found_employees)
+            {
+                EmployeeListView.Items.Add(employee);
+            }
+            
         }
 
         public void OnClick_editMember(object sender, RoutedEventArgs e)
