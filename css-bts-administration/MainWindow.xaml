@@ -26,7 +26,7 @@
             </StackPanel>
         </Border>
 
-        <Border Visibility="Collapsed" Grid.Column="1" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
+        <Border Visibility="Visible" Grid.Column="1" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
             <ListView Name="EmployeeListView">
 
                 <ListView.View>
@@ -48,7 +48,7 @@
             </ListView>
         </Border>
 
-        <Border Name="EmployeeForm" Grid.Column="1" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
+        <Border Visibility="Collapsed" Name="EmployeeForm" Grid.Column="1" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
             <ScrollViewer>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -60,31 +60,31 @@
                     <StackPanel Grid.Column="1" VerticalAlignment="Top">
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Vorname</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBlock Name="InputFirstName"></TextBlock>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Nachname</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="InputLastName"></TextBox>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Adresse</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="InputAddress"></TextBox>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Telefonnummer</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="InputPhoneNumber"></TextBox>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">E-Mail</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="InputEmail"></TextBox>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Position</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="InputPosition"></TextBox>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Eintrittsdatum</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="Input"></TextBox>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Gehalt</TextBlock>
