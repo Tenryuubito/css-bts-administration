@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,10 +28,7 @@ namespace css_bts_administration
         {
             InitializeComponent();
 
-            foreach (Employee employee in context.Employees)
-            {
-                EmployeeListView.Items.Add(employee);
-            }
+            ReloadEmployeeList();
         }
 
         public void OnClick_addNewMember(object sender, RoutedEventArgs e)
@@ -38,16 +36,29 @@ namespace css_bts_administration
             EmployeeListView.Visibility = Visibility.Collapsed;
             EmployeeForm.Visibility = Visibility.Visible;
             
-            
-            
             EmployeeListView.Visibility = Visibility.Visible;
             EmployeeForm.Visibility = Visibility.Collapsed;
         }
 
+        private void ReloadEmployeeList()
+        {
+            EmployeeListView.Items.Clear();
+            foreach (Employee employee in context.Employees)
+            {
+                EmployeeListView.Items.Add(employee);
+            }
+        }
 
         public void OnClick_deleteMember(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Button funktioniert");
+            foreach (Employee employee in EmployeeListView.SelectedItems)
+            {
+                context.Employees.Remove(employee);
+            }
+
+            context.SaveChanges();
+            
+            ReloadEmployeeList();
         }
 
         public void OnClick_exportMembers(object sender, RoutedEventArgs e)
