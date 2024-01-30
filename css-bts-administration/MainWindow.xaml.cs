@@ -26,6 +26,11 @@ namespace css_bts_administration
         public MainWindow()
         {
             InitializeComponent();
+
+            foreach (Employee employee in context.Employees)
+            {
+                EmployeeListView.Items.Add(employee);
+            }
         }
 
         public void OnClick_addNewMember(object sender, RoutedEventArgs e)
@@ -44,6 +49,9 @@ namespace css_bts_administration
 
             context.Employees.Add(employee);
             context.SaveChanges();
+
+            EmployeeListView.Items.Add(employee);
+
             MessageBox.Show("Add new Member completed.");
         }
 
@@ -65,15 +73,12 @@ namespace css_bts_administration
 
         public void OnClick_searchMember(object sender, RoutedEventArgs e)
         {
-            string var1;
-            var1 = input.Text;
-
+            MessageBox.Show("Button funktioniert");
         }
 
         public void OnClick_editMember(object sender, RoutedEventArgs e)
         {
-            foreach (Employee employee in context.Employees)
-                MessageBox.Show(employee.Email);
+            MessageBox.Show("Button funktioniert");
         }
     }
 

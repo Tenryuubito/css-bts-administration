@@ -27,21 +27,21 @@
         </Border>
 
         <Border Grid.Column="2" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
-            <ListView>
+            <ListView Name="EmployeeListView">
 
                 <ListView.View>
 
                     <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
 
-                        <GridViewColumn Header="Nachname" Width="100"/>
-                        <GridViewColumn Header="Vorname" Width="100"/>
-                        <GridViewColumn Header="Adresse" Width="100"/>
-                        <GridViewColumn Header="Telefonnummer" Width="100"/>
-                        <GridViewColumn Header="E-Mail" Width="100"/>
-                        <GridViewColumn Header="Position" Width="100"/>
-                        <GridViewColumn Header="Firmeneintritt" Width="100"/>
-                        <GridViewColumn Header="Gehalt" Width="100"/>
-                        <GridViewColumn Header="Rentenbeginn" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="Nachname" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" Header="Vorname" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Address}" Header="Address" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PhoneNumber}" Header="Telefonnummer" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Email}" Header="E-Mail" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Position}" Header="Position" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=CompanyEntry}" Header="Firmeneintritt" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Salary}" Header="Gehalt" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PensionStart}" Header="Rentenbeginn" Width="100"/>
                     </GridView>
 
                 </ListView.View>
