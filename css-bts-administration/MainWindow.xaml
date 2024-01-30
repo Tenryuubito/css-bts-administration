@@ -26,7 +26,7 @@
             </StackPanel>
         </Border>
 
-        <Border Visibility="Visible" Grid.Column="1" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
+        <Border Name="EmployeeListViewContainer" Visibility="Visible" Grid.Column="1" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
             <ListView Name="EmployeeListView">
 
                 <ListView.View>
@@ -60,7 +60,7 @@
                     <StackPanel Grid.Column="1" VerticalAlignment="Top">
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Vorname</TextBlock>
-                            <TextBlock Name="InputFirstName"></TextBlock>
+                            <TextBox Name="InputFirstName"></TextBox>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Nachname</TextBlock>
@@ -82,20 +82,20 @@
                             <TextBlock MinWidth="100">Position</TextBlock>
                             <TextBox Name="InputPosition"></TextBox>
                         </DockPanel>
-                        <DockPanel Height="15" Margin="0 10 0 0">
+                        <DockPanel MinHeight="30" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Eintrittsdatum</TextBlock>
-                            <TextBox Name="Input"></TextBox>
+                            <DatePicker Name="InputCompanyEntry"></DatePicker>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Gehalt</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="InputSalary"></TextBox>
                         </DockPanel>
                         <DockPanel Height="15" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Renteneintritt</TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="InputPensionStart"></TextBox>
                         </DockPanel>
-                        <Button Visibility="Collapsed" Margin="0 25 0 0">Hinzufügen</Button>
-                        <Button Margin="0 25 0 0">Speichern</Button>
+                        <Button Click="OnClick_addMember" Visibility="Visible" Margin="0 25 0 0">Hinzufügen</Button>
+                        <Button Visibility="Collapsed" Margin="0 25 0 0">Speichern</Button>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
