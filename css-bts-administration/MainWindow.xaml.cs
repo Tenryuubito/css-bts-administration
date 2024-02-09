@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mime;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,9 +69,33 @@ namespace css_bts_administration
             MessageBox.Show("Button funktioniert");
         }
 
-        public void OnClick_importMembers(object sender, RoutedEventArgs e)
+        public void OnClick_importMembers(object sender, RoutedEventArgs e) //TODO: Duplicates Entries if clicked again
         {
-            MessageBox.Show("Button funktioniert");
+            string line;
+            StreamReader sr = new StreamReader("C:\\Users\\Erik\\RiderProjects\\itprojekt2\\importEmployees.txt");
+
+                                        
+            while (sr.Peek() >= 0)
+            {
+                Employee employee = new Employee();
+                employee.FirstName = sr.ReadLine();
+                employee.LastName = sr.ReadLine();
+                employee.Address = sr.ReadLine();
+                employee.PhoneNumber = sr.ReadLine();
+                employee.Email = sr.ReadLine();
+                employee.Position = sr.ReadLine();
+                employee.CompanyEntry = 123;
+                employee.Salary = 123;
+                employee.PensionStart = 123;
+                context.Employees.Add(employee);
+                context.SaveChanges();
+            }
+            
+            sr.Close();
+            ReloadEmployeeList(); 
+            Console.WriteLine("HERE");
+            
+           
         }
 
         public void OnClick_searchMember(object sender, RoutedEventArgs e)
