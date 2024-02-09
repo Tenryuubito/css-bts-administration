@@ -1,14 +1,23 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mime;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace css_bts_administration
 {
@@ -103,9 +112,33 @@ namespace css_bts_administration
             MessageBox.Show("Button funktioniert");
         }
 
-        private void OnClick_importMembers(object sender, RoutedEventArgs e)
+        public void OnClick_importMembers(object sender, RoutedEventArgs e) //TODO: Duplicates Entries if clicked again
         {
-            MessageBox.Show("Button funktioniert");
+            string line;
+            StreamReader sr = new StreamReader("C:\\Users\\Erik\\RiderProjects\\itprojekt2\\importEmployees.txt");
+
+                                        
+            while (sr.Peek() >= 0)
+            {
+                Employee employee = new Employee();
+                employee.FirstName = sr.ReadLine();
+                employee.LastName = sr.ReadLine();
+                employee.Address = sr.ReadLine();
+                employee.PhoneNumber = sr.ReadLine();
+                employee.Email = sr.ReadLine();
+                employee.Position = sr.ReadLine();
+                employee.CompanyEntry = sr.ReadLine() ;
+                employee.Salary = sr.ReadLine();
+                employee.PensionStart = sr.ReadLine();
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
+            }
+            
+            sr.Close();
+            ReloadEmployeeList(); 
+            Console.WriteLine("HERE");
+            
+           
         }
 
         private void OnClick_searchMember(object sender, RoutedEventArgs e)
