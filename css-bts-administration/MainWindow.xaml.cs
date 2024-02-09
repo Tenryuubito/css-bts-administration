@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mime;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,8 +36,22 @@ namespace css_bts_administration
         {
             Employee employee = new Employee()
             {
-                FirstName = InputFirstName.Text
+                FirstName = InputFirstName.Text,
+                LastName = InputLastName.Text,
+                CompanyEntry = InputCompanyEntry.Text,
+                Address = InputAddress.Text,
+                Email = InputEmail.Text,
+                Position = InputPosition.Text,
+                Salary = InputSalary.Text,
+                PensionStart = InputPensionStart.Text,
+                PhoneNumber = InputFirstName.Text
             };
+
+            if (!ValidateEmployeeData(ref employee))
+            {
+                MessageBox.Show("Validation failed!");
+                return;
+            }
 
             _context.Employees.Add(employee);
             EmployeeListView.Items.Add(employee);
@@ -45,6 +60,17 @@ namespace css_bts_administration
             EmployeeForm.Visibility = Visibility.Collapsed;
             
             _context.SaveChangesAsync();
+        }
+
+        private bool ValidateEmployeeData(ref Employee employee)
+        {
+            return new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.FirstName)
+                && new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.LastName)
+                && new Regex("/^([a-zäöüß\\s\\d.,-]+?)\\s*([\\d\\s]+(?:\\s?[-|+/]\\s?\\d+)?\\s*[a-z]?)?\\s*(\\d{5})\\s*(.+)?$/i\n").IsMatch(employee.Address)
+                && new Regex("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$").IsMatch(employee.PhoneNumber)
+                && new Regex("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b").IsMatch(employee.Email)
+                && new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.Position)
+                && new Regex("/^(([^0]{1})([0-9])*|(0{1}))(\\,\\d{2}){0,1}\u20ac?$/").IsMatch(employee.Salary);
         }
         
         private void ReloadEmployeeList()
@@ -73,29 +99,29 @@ namespace css_bts_administration
             MessageBox.Show("Button funktioniert");
         }
 
-        public void OnClick_importMembers(object sender, RoutedEventArgs e)
+        private void OnClick_importMembers(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Button funktioniert");
         }
 
-        public void OnClick_searchMember(object sender, RoutedEventArgs e)
+        private void OnClick_searchMember(object sender, RoutedEventArgs e)
         {
-            string text = input.Text; 
-            var found_employees = from b in context.Employees
-                where b.FirstName.Contains(text) || b.LastName.Contains(text) || b.Address.Contains(text) || b.Salary.ToString().Contains(text) || b.Email.Contains(text)
-                || b.Position.Contains(text) || b.CompanyEntry.ToString().Contains(text) || b.PhoneNumber.Contains(text) || b.CompanyEntry.ToString().Contains(text) ||
-                b.PensionStart.ToString().Contains(text)
+            string searchInputText = searchInput.Text; 
+            var foundEmployees = from b in _context.Employees
+                where b.FirstName.Contains(searchInputText) || b.LastName.Contains(searchInputText) || b.Address.Contains(searchInputText) || b.Salary.Contains(searchInputText) || b.Email.Contains(searchInputText)
+                || b.Position.Contains(searchInputText) || b.CompanyEntry.Contains(searchInputText) || b.PhoneNumber.Contains(searchInputText) || b.CompanyEntry.Contains(searchInputText) ||
+                b.PensionStart.Contains(searchInputText)
                 select b;
 
             EmployeeListView.Items.Clear();
-            foreach (Employee employee in found_employees)
+            foreach (Employee employee in foundEmployees)
             {
                 EmployeeListView.Items.Add(employee);
             }
             
         }
 
-        public void OnClick_editMember(object sender, RoutedEventArgs e)
+        private void OnClick_editMember(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Button funktioniert");
         }

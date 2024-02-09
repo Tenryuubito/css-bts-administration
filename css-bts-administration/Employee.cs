@@ -8,9 +8,6 @@ namespace css_bts_administration
 {
     class Employee
     {
-        public Employee() { }
-
-
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,8 +15,8 @@ namespace css_bts_administration
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Position { get; set; }
-        public long CompanyEntry { get; set; }
-        public float Salary { get; set; }
-        public long PensionStart { get; set; }
+        public string CompanyEntry { get; set; }
+        public string Salary { get; set; }
+        public string PensionStart { get; set; }
     }
 }
