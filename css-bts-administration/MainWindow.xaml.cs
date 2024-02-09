@@ -28,8 +28,13 @@ namespace css_bts_administration
 
         private void OnClick_addNewMember(object sender, RoutedEventArgs e)
         {
-            EmployeeListViewContainer.Visibility = Visibility.Collapsed;
-            EmployeeForm.Visibility = Visibility.Visible;
+            ChangeFormState(true);
+        }
+
+        private void ChangeFormState(bool show)
+        {
+            EmployeeListViewContainer.Visibility = show ? Visibility.Collapsed : Visibility.Visible;
+            EmployeeForm.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void OnClick_addMember(object sender, RoutedEventArgs e)
@@ -55,11 +60,10 @@ namespace css_bts_administration
 
             _context.Employees.Add(employee);
             EmployeeListView.Items.Add(employee);
-
-            EmployeeListViewContainer.Visibility = Visibility.Visible;
-            EmployeeForm.Visibility = Visibility.Collapsed;
             
             _context.SaveChangesAsync();
+            
+            ChangeFormState(false);
         }
 
         private bool ValidateEmployeeData(ref Employee employee)
@@ -123,7 +127,15 @@ namespace css_bts_administration
 
         private void OnClick_editMember(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Button funktioniert");
+            Employee employee = EmployeeListView.SelectedItem as Employee;
+
+            if (employee == null)
+            {
+                MessageBox.Show("You need to select an employee to edit.");
+                return;
+            }
+
+            ChangeFormState(true);
         }
     }
 
