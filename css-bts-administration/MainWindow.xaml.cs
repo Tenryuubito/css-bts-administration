@@ -38,8 +38,22 @@ namespace css_bts_administration
 
         private void ChangeFormState(bool show)
         {
+            ClearForm();
             EmployeeListViewContainer.Visibility = show ? Visibility.Collapsed : Visibility.Visible;
             EmployeeForm.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void ClearForm()
+        {
+            InputFirstName.Text = "";
+            InputLastName.Text = "";
+            InputAddress.Text = "";
+            InputPhoneNumber.Text = "";
+            InputEmail.Text = "";
+            InputPosition.Text = "";
+            InputCompanyEntry.Text ="";
+            InputSalary.Text = "";
+            InputPensionStart.Text = "";
         }
 
         private void OnClick_addMember(object sender, RoutedEventArgs e)
@@ -105,7 +119,6 @@ namespace css_bts_administration
 
         private void OnClick_exportMembers(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Button funktioniert");
             SaveFileDialog saveFileDialog = new();
             saveFileDialog.Title = "Speichern der Exportdatei";
             saveFileDialog.CheckPathExists = true;
@@ -144,33 +157,27 @@ namespace css_bts_administration
             }
         }
 
-        public void OnClick_importMembers(object sender, RoutedEventArgs e) //TODO: Duplicates Entries if clicked again
+        private void OnClick_importMembers(object sender, RoutedEventArgs e)
         {
-            string line;
-            StreamReader sr = new StreamReader("C:\\Users\\Erik\\RiderProjects\\itprojekt2\\importEmployees.txt");
-
-                                        
-            while (sr.Peek() >= 0)
+            for (int dummyNr = 0; dummyNr < 1000; ++dummyNr)
             {
-                Employee employee = new Employee();
-                employee.FirstName = sr.ReadLine();
-                employee.LastName = sr.ReadLine();
-                employee.Address = sr.ReadLine();
-                employee.PhoneNumber = sr.ReadLine();
-                employee.Email = sr.ReadLine();
-                employee.Position = sr.ReadLine();
-                employee.CompanyEntry = sr.ReadLine() ;
-                employee.Salary = sr.ReadLine();
-                employee.PensionStart = sr.ReadLine();
+                Employee employee = new Employee()
+                {
+                    FirstName = Faker.Name.First(),
+                    LastName = Faker.Name.Last(),
+                    CompanyEntry = DateTime.Now.ToString(),
+                    Address = Faker.Address.StreetAddress(),
+                    Email = Faker.Internet.Email(),
+                    Position = "Dummy",
+                    Salary = Faker.RandomNumber.Next(2000, 3000).ToString(),
+                    PensionStart = Faker.Identification.DateOfBirth().ToString(),
+                    PhoneNumber = Faker.Phone.Number()
+                };
                 _context.Employees.Add(employee);
-                _context.SaveChanges();
             }
-            
-            sr.Close();
-            ReloadEmployeeList(); 
-            Console.WriteLine("HERE");
-            
-           
+
+            _context.SaveChanges();
+            ReloadEmployeeList();
         }
 
         private void OnClick_searchMember(object sender, RoutedEventArgs e)
