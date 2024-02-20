@@ -13,7 +13,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Microsoft.Win32;
 using Newtonsoft.Json;
-using Excel = Microsoft.Office.Interop.Excel;
 
 namespace css_bts_administration
 {
@@ -73,13 +72,13 @@ namespace css_bts_administration
 
         private bool ValidateEmployeeData(ref Employee employee)
         {
-            return new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.FirstName)
-                && new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.LastName)
-                && new Regex("/^([a-zäöüß\\s\\d.,-]+?)\\s*([\\d\\s]+(?:\\s?[-|+/]\\s?\\d+)?\\s*[a-z]?)?\\s*(\\d{5})\\s*(.+)?$/i\n").IsMatch(employee.Address)
-                && new Regex("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$").IsMatch(employee.PhoneNumber)
-                && new Regex("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b").IsMatch(employee.Email)
-                && new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.Position)
-                && new Regex("/^(([^0]{1})([0-9])*|(0{1}))(\\,\\d{2}){0,1}\u20ac?$/").IsMatch(employee.Salary);
+            return new Regex("^[a-zA-Z.äÄöÖüÜ]+$").IsMatch(employee.FirstName)
+                   && new Regex("^[a-zA-Z.äÄöÖüÜ]+$").IsMatch(employee.LastName)
+                   && new Regex("^[a-zA-Z.äÄöÖüÜß ]+?\\d*$").IsMatch(employee.Address)
+                   //&& new Regex("[0-9]+").IsMatch(employee.PhoneNumber)
+                   && new Regex("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$").IsMatch(employee.Email) 
+                   && new Regex("^[a-zA-ZäöüÄÖÜß]+$").IsMatch(employee.Position)
+                   && new Regex("^[0-9$€]+$").IsMatch(employee.Salary);
         }
         
         private void ReloadEmployeeList()
