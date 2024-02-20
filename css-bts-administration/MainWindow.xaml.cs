@@ -1,23 +1,19 @@
 ﻿using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Net.Mime;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.Win32;
+using Newtonsoft.Json;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace css_bts_administration
 {
@@ -110,6 +106,42 @@ namespace css_bts_administration
         private void OnClick_exportMembers(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Button funktioniert");
+            SaveFileDialog saveFileDialog = new();
+            saveFileDialog.Title = "Speichern der Exportdatei";
+            saveFileDialog.CheckPathExists = true;
+            saveFileDialog.DefaultExt = "json";
+            saveFileDialog.Filter = "JSON files (*.json)|*.json";
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() != true)
+            {
+                MessageBox.Show("Beim speichern der Exportdatei ist wohl etwas schiefgelaufen ;)");
+                return;
+            }
+            
+            StringBuilder stringBuilder = new();
+            StringWriter stringWriter = new(stringBuilder);
+
+            using (JsonWriter writer = new JsonTextWriter(stringWriter))
+            {
+                writer.Formatting = Formatting.Indented;
+                writer.WriteStartArray();
+                
+                foreach (Employee employee in _context.Employees)
+                {
+                    writer.WriteStartObject();
+                    foreach (PropertyInfo property in typeof(Employee).GetProperties())
+                    {
+                        writer.WritePropertyName(property.Name);
+                        writer.WriteValue(property.GetValue(employee));
+                    }
+                    writer.WriteEndObject();
+                }
+                
+                writer.WriteEndArray();
+                stringWriter.Close();
+                
+                File.WriteAllText(saveFileDialog.FileName, stringBuilder.ToString());
+            }
         }
 
         public void OnClick_importMembers(object sender, RoutedEventArgs e) //TODO: Duplicates Entries if clicked again
