@@ -1,11 +1,16 @@
 ﻿using System;
-using System.Data.Entity.Migrations;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -95,18 +100,18 @@ namespace css_bts_administration
             
             _context.SaveChangesAsync();
             
-            ChangeFormState(FormState.ListEmployees);
+            ChangeFormState(false);
         }
 
         private bool ValidateEmployeeData(ref Employee employee)
         {
-            return new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.FirstName)
-                && new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.LastName)
-                && new Regex("/^([a-zäöüß\\s\\d.,-]+?)\\s*([\\d\\s]+(?:\\s?[-|+/]\\s?\\d+)?\\s*[a-z]?)?\\s*(\\d{5})\\s*(.+)?$/i\n").IsMatch(employee.Address)
-                && new Regex("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$").IsMatch(employee.PhoneNumber)
-                && new Regex("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b").IsMatch(employee.Email)
-                && new Regex("/[^a-zA-ZäöüÄÖÜß]/g").IsMatch(employee.Position)
-                && new Regex("/^(([^0]{1})([0-9])*|(0{1}))(\\,\\d{2}){0,1}\u20ac?$/").IsMatch(employee.Salary);
+            return new Regex("^[a-zA-Z.äÄöÖüÜ]+$").IsMatch(employee.FirstName)
+                   && new Regex("^[a-zA-Z.äÄöÖüÜ]+$").IsMatch(employee.LastName)
+                   && new Regex("^[a-zA-Z.äÄöÖüÜß ]+?\\d*$").IsMatch(employee.Address)
+                   //&& new Regex("[0-9]+").IsMatch(employee.PhoneNumber)
+                   && new Regex("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$").IsMatch(employee.Email) 
+                   && new Regex("^[a-zA-ZäöüÄÖÜß]+$").IsMatch(employee.Position)
+                   && new Regex("^[0-9$€]+$").IsMatch(employee.Salary);
         }
         
         private void ReloadEmployeeList()
@@ -264,12 +269,6 @@ namespace css_bts_administration
             _context.SaveChanges();
             
             ReloadEmployeeList();
-            ChangeFormState(FormState.ListEmployees);
-        }
-
-        private void OnClick_backToListView(object sender, RoutedEventArgs e)
-        {
-            ClearForm();
             ChangeFormState(FormState.ListEmployees);
         }
     }
