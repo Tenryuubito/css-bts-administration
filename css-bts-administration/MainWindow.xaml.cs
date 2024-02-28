@@ -87,7 +87,7 @@ namespace css_bts_administration
                 Position = InputPosition.Text,
                 Salary = InputSalary.Text,
                 PensionStart = InputPensionStart.Text,
-                PhoneNumber = InputFirstName.Text
+                PhoneNumber = InputPhoneNumber.Text
             };
 
             if (!ValidateEmployeeData(ref employee))
