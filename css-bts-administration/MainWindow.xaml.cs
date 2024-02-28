@@ -22,7 +22,9 @@ namespace css_bts_administration
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly EmployeeContext _context = new EmployeeContext();
+        private readonly EmployeeContext _context = new();
+
+        private Employee? _employeeToEdit;
 
         public MainWindow()
         {
@@ -216,17 +218,59 @@ namespace css_bts_administration
 
         private void OnClick_editMember(object sender, RoutedEventArgs e)
         {
-            Employee employee = EmployeeListView.SelectedItem as Employee;
+            _employeeToEdit = EmployeeListView.SelectedItem as Employee;
 
-            if (employee == null)
+            if (_employeeToEdit == null)
             {
                 MessageBox.Show("You need to select an employee to edit.");
                 return;
             }
 
-            ChangeFormState(true);
+            ChangeFormState(FormState.EditExistingEmployee);
+
+            SetEmployeeDataToForm(ref _employeeToEdit);
+        }
+
+        private void SetEmployeeDataToForm(ref Employee employee)
+        {
+            _employeeToEdit = employee;
+            InputFirstName.Text = employee.FirstName;
+            InputLastName.Text = employee.LastName;
+            InputAddress.Text = employee.Address;
+            InputPhoneNumber.Text = employee.PhoneNumber;
+            InputEmail.Text = employee.Email;
+            InputPosition.Text = employee.Position;
+            InputCompanyEntry.Text = employee.CompanyEntry;
+            InputSalary.Text = employee.Salary;
+            InputPensionStart.Text = employee.PensionStart;
+        }
+
+
+        private void OnCLick_saveChanges(object sender, RoutedEventArgs e)
+        {
+            if (_employeeToEdit == null) throw new NullReferenceException();
+
+            if (!ValidateEmployeeData(ref _employeeToEdit))
+            {
+                MessageBox.Show("Ungültige Eingabe im Formular.");
+                return;
+            }
+            
+            _employeeToEdit.FirstName = InputFirstName.Text;
+            _employeeToEdit.LastName = InputLastName.Text;
+            _employeeToEdit.Address = InputAddress.Text;
+            _employeeToEdit.PhoneNumber = InputPhoneNumber.Text;
+            _employeeToEdit.Email = InputEmail.Text;
+            _employeeToEdit.Position = InputPosition.Text;
+            _employeeToEdit.CompanyEntry = InputCompanyEntry.Text;
+            _employeeToEdit.Salary = InputSalary.Text;
+            _employeeToEdit.PensionStart = InputPensionStart.Text;
+            
+            _context.Employees.AddOrUpdate(_employeeToEdit);
+            _context.SaveChanges();
+            
+            ReloadEmployeeList();
+            ChangeFormState(FormState.ListEmployees);
         }
     }
-
-
 }
