@@ -33,14 +33,31 @@ namespace css_bts_administration
 
         private void OnClick_addNewMember(object sender, RoutedEventArgs e)
         {
-            ChangeFormState(true);
+            ChangeFormState(FormState.AddNewEmployee);
         }
 
-        private void ChangeFormState(bool show)
+        private void ChangeFormState(FormState formState)
         {
             ClearForm();
-            EmployeeListViewContainer.Visibility = show ? Visibility.Collapsed : Visibility.Visible;
-            EmployeeForm.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+            switch (formState)
+            {
+                case (FormState.ListEmployees):
+                    EmployeeListViewContainer.Visibility = Visibility.Visible;
+                    EmployeeForm.Visibility = Visibility.Collapsed;
+                    break;
+                case (FormState.AddNewEmployee):
+                    EmployeeListViewContainer.Visibility = Visibility.Collapsed;
+                    EmployeeForm.Visibility = Visibility.Visible;
+                    AddMemberButton.Visibility = Visibility.Visible;
+                    SaveChangesButton.Visibility = Visibility.Hidden;
+                    break;
+                case (FormState.EditExistingEmployee):
+                    EmployeeListViewContainer.Visibility = Visibility.Collapsed;
+                    EmployeeForm.Visibility = Visibility.Visible;
+                    AddMemberButton.Visibility = Visibility.Hidden;
+                    SaveChangesButton.Visibility = Visibility.Visible;
+                    break;
+            }
         }
 
         private void ClearForm()
