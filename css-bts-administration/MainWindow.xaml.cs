@@ -67,7 +67,7 @@ namespace css_bts_administration
                 Position = InputPosition.Text,
                 Salary = InputSalary.Text,
                 PensionStart = InputPensionStart.Text,
-                PhoneNumber = InputFirstName.Text
+                PhoneNumber = InputPhoneNumber.Text
             };
 
             if (!ValidateEmployeeData(ref employee))
@@ -86,13 +86,13 @@ namespace css_bts_administration
 
         private bool ValidateEmployeeData(ref Employee employee)
         {
-            return new Regex("^[a-zA-Z.äÄöÖüÜ]+$").IsMatch(employee.FirstName)
-                   && new Regex("^[a-zA-Z.äÄöÖüÜ]+$").IsMatch(employee.LastName)
-                   && new Regex("^[a-zA-Z.äÄöÖüÜß ]+?\\d*$").IsMatch(employee.Address)
-                   //&& new Regex("[0-9]+").IsMatch(employee.PhoneNumber)
-                   && new Regex("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$").IsMatch(employee.Email) 
-                   && new Regex("^[a-zA-ZäöüÄÖÜß]+$").IsMatch(employee.Position)
-                   && new Regex("^[0-9$€]+$").IsMatch(employee.Salary);
+            return new Regex("^[a-zA-ZäÄöÖüÜß ]{2,}$").IsMatch(employee.FirstName)
+                   && new Regex("^[a-zA-Z.äÄöÖüÜ ]{2,}$").IsMatch(employee.LastName)
+                   && new Regex("^[a-zA-Z.äÄöÖüÜß ]+ \\d+$").IsMatch(employee.Address)
+                   && new Regex("^\\+?\\d+$").IsMatch(employee.PhoneNumber)
+                   && new Regex("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$").IsMatch(employee.Email)
+                   && new Regex("^[a-zA-ZäöüÄÖÜß ]+$").IsMatch(employee.Position)
+                   && new Regex("^[0-9]+[€$]*$").IsMatch(employee.Salary);
         }
         
         private void ReloadEmployeeList()
