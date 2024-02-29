@@ -22,7 +22,7 @@
                 <Button Click="OnClick_editMember" Padding="13" Margin="5">Mitarbeiter bearbeiten</Button>
                 <Button Click="OnClick_deleteMember" Padding="13" Margin="5">Mitarbeiter löschen</Button>
                 <Button Click="OnClick_exportMembers" Padding="13" Margin="5">Mitarbeiter exportieren</Button>
-                <Button Click="OnClick_importMembers" Padding="13" Margin="5">Mitarbeiter importieren</Button>
+                <Button Click="OnClick_importMembers" Padding="13" Margin="5">Mitarbeiter importieren (dummyData - 1000)</Button>
             </StackPanel>
         </Border>
 
@@ -90,12 +90,13 @@
                             <TextBlock MinWidth="100">Gehalt</TextBlock>
                             <TextBox Name="InputSalary"></TextBox>
                         </DockPanel>
-                        <DockPanel Height="15" Margin="0 10 0 0">
+                        <DockPanel MinHeight="30" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Renteneintritt</TextBlock>
                             <DatePicker Name="InputPensionStart"></DatePicker>
                         </DockPanel>
-                        <Button Click="OnClick_addMember" Visibility="Visible" Margin="0 25 0 0">Hinzufügen</Button>
-                        <Button Visibility="Collapsed" Margin="0 25 0 0">Speichern</Button>
+                        <Button Name="AddMemberButton" Click="OnClick_addMember" Visibility="Visible" Margin="0 25 0 0">Hinzufügen</Button>
+                        <Button Name="SaveChangesButton" Click="OnCLick_saveChanges" Visibility="Collapsed" Margin="0 25 0 0">Speichern</Button>
+                        <Button Click="OnClick_backToListView" Margin="0 15 0 0">Abbrechen</Button>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
