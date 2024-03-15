@@ -3,6 +3,7 @@ using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -103,10 +104,9 @@ namespace css_bts_administration
             return new Regex("^[a-zA-ZäÄöÖüÜß ]{2,}$").IsMatch(employee.FirstName)
                    && new Regex("^[a-zA-Z.äÄöÖüÜ ]{2,}$").IsMatch(employee.LastName)
                    && new Regex("^[a-zA-Z.äÄöÖüÜß ]+ \\d+$").IsMatch(employee.Address)
-                   && new Regex("^\\+?\\d+$").IsMatch(employee.PhoneNumber)
                    && new Regex("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$").IsMatch(employee.Email)
                    && new Regex("^[a-zA-ZäöüÄÖÜß ]+$").IsMatch(employee.Position)
-                   && new Regex("^[0-9]+[€$]*$").IsMatch(employee.Salary);
+                   && new Regex("^[0-9]+[.][0-9]{2}[€]$").IsMatch(employee.Salary);
         }
         
         private void ReloadEmployeeList()
@@ -178,12 +178,12 @@ namespace css_bts_administration
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    CompanyEntry = DateTime.Now.ToString(),
+                    CompanyEntry = DateTime.Now.ToString("dd.MM.yyyy"),
                     Address = Faker.Address.StreetAddress(),
                     Email = Faker.Internet.Email(),
                     Position = "Dummy",
-                    Salary = Faker.RandomNumber.Next(2000, 3000).ToString(),
-                    PensionStart = Faker.Identification.DateOfBirth().ToString(),
+                    Salary = Faker.RandomNumber.Next(2000, 3000) + ".00€",
+                    PensionStart = Faker.Identification.DateOfBirth().ToString("dd.MM.yyyy"),
                     PhoneNumber = Faker.Phone.Number()
                 };
                 _context.Employees.Add(employee);
@@ -244,11 +244,6 @@ namespace css_bts_administration
         {
             if (_employeeToEdit == null) throw new NullReferenceException();
 
-            if (!ValidateEmployeeData(ref _employeeToEdit))
-            {
-                MessageBox.Show("Ungültige Eingabe im Formular.");
-                return;
-            }
             
             _employeeToEdit.FirstName = InputFirstName.Text;
             _employeeToEdit.LastName = InputLastName.Text;
@@ -260,6 +255,11 @@ namespace css_bts_administration
             _employeeToEdit.Salary = InputSalary.Text;
             _employeeToEdit.PensionStart = InputPensionStart.Text;
             
+            if (!ValidateEmployeeData(ref _employeeToEdit))
+            {
+                MessageBox.Show("Ungültige Eingabe im Formular.");
+                return;
+            }
             _context.Employees.AddOrUpdate(_employeeToEdit);
             _context.SaveChanges();
             
