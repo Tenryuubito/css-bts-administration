@@ -200,7 +200,7 @@ namespace css_bts_administration
 
         private void OnClick_searchMember(object sender, RoutedEventArgs e)
         {
-            string searchInputText = searchInput.Text; 
+            string searchInputText = searchInput.Text == _placeholderText ? "" : searchInput.Text; 
             var foundEmployees = from b in _context.Employees
                 where b.FirstName.Contains(searchInputText) || b.LastName.Contains(searchInputText) || b.Address.Contains(searchInputText) || b.Salary.Contains(searchInputText) || b.Email.Contains(searchInputText)
                 || b.Position.Contains(searchInputText) || b.CompanyEntry.Contains(searchInputText) || b.PhoneNumber.Contains(searchInputText) || b.CompanyEntry.Contains(searchInputText) ||
