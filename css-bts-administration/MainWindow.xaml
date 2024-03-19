@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:css_bts_administration"
+        Background="#F5F5F5"
         mc:Ignorable="d"
         Title="Mitarbeiterverwaltung" Height="450" Width="1300" WindowState="Maximized">
     <Grid>
@@ -12,21 +12,69 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
+        <Border BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10" Background="SkyBlue">
             <StackPanel>
                 <DockPanel Margin="5">
-                    <TextBox MinWidth="200" Name="searchInput"></TextBox>
-                    <Button  Click="OnClick_searchMember">Suchen</Button>
+                    <TextBox VerticalAlignment="Center" Padding="3pt" LostFocus="OnLostFocus_fillPlaceholder" GotFocus="GotFocus_emptyBox" MinWidth="200" Name="searchInput">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="7  0 0 7 "/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <Button FontSize="17" Click="OnClick_searchMember">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="0 7 7 0"/>
+                            </Style>
+                        </Button.Resources>
+                        &#x26B2;
+                    </Button>
                 </DockPanel>
-                <Button Click="OnClick_addNewMember" Padding="13" Margin="5">Mitarbeiter hinzufügen</Button>
-                <Button Click="OnClick_editMember" Padding="13" Margin="5">Mitarbeiter bearbeiten</Button>
-                <Button Click="OnClick_deleteMember" Padding="13" Margin="5">Mitarbeiter löschen</Button>
-                <Button Click="OnClick_exportMembers" Padding="13" Margin="5">Mitarbeiter exportieren</Button>
-                <Button Click="OnClick_importMembers" Padding="13" Margin="5">Mitarbeiter importieren (dummyData - 1000)</Button>
+                <Button Background="AliceBlue" Click="OnClick_addNewMember" Padding="13" Margin="5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                    Mitarbeiter hinzufügen
+                </Button>
+                <Button Background="AliceBlue" Click="OnClick_editMember" Padding="13" Margin="5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                    Mitarbeiter bearbeiten
+                </Button>
+                <Button Background="AliceBlue" Click="OnClick_deleteMember" Padding="13" Margin="5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                    Mitarbeiter löschen
+                </Button>
+                <Button Background="AliceBlue" Click="OnClick_exportMembers" Padding="13" Margin="5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                    Mitarbeiter exportieren
+                </Button>
+                <Button Background="AliceBlue" Click="OnClick_importMembers" Padding="13" Margin="5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                    Mitarbeiter importieren (Dummy Daten)
+                </Button>
             </StackPanel>
         </Border>
 
-        <Border Name="EmployeeListViewContainer" Visibility="Visible" Grid.Column="1" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
+        <Border Background="Gray" Name="EmployeeListViewContainer" Visibility="Visible" Grid.Column="1" BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
             <ListView Name="EmployeeListView">
 
                 <ListView.View>
@@ -53,46 +101,46 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     
                     <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                        <DockPanel Height="15" Margin="0 10 0 0">
-                            <TextBlock MinWidth="100">Vorname</TextBlock>
-                            <TextBox Name="InputFirstName"></TextBox>
+                        <DockPanel Height="25" Margin="0 10 0 0">
+                            <TextBlock VerticalAlignment="Center" MinWidth="100">Vorname</TextBlock>
+                            <TextBox VerticalAlignment="Center" Margin="1pt" Name="InputFirstName"></TextBox>
                         </DockPanel>
-                        <DockPanel Height="15" Margin="0 10 0 0">
-                            <TextBlock MinWidth="100">Nachname</TextBlock>
-                            <TextBox Name="InputLastName"></TextBox>
+                        <DockPanel Height="25" Margin="0 10 0 0">
+                            <TextBlock VerticalAlignment="Center" MinWidth="100">Nachname</TextBlock>
+                            <TextBox VerticalAlignment="Center" Margin="1pt"  Name="InputLastName"></TextBox>
                         </DockPanel>
-                        <DockPanel Height="15" Margin="0 10 0 0">
-                            <TextBlock MinWidth="100">Adresse</TextBlock>
-                            <TextBox Name="InputAddress"></TextBox>
+                        <DockPanel Height="25" Margin="0 10 0 0">
+                            <TextBlock VerticalAlignment="Center" MinWidth="100">Adresse</TextBlock>
+                            <TextBox VerticalAlignment="Center" Margin="1pt"  Name="InputAddress"></TextBox>
                         </DockPanel>
-                        <DockPanel Height="15" Margin="0 10 0 0">
-                            <TextBlock MinWidth="100">Telefonnummer</TextBlock>
-                            <TextBox Name="InputPhoneNumber"></TextBox>
+                        <DockPanel Height="25" Margin="0 10 0 0">
+                            <TextBlock VerticalAlignment="Center" MinWidth="100">Telefonnummer</TextBlock>
+                            <TextBox VerticalAlignment="Center" Margin="1pt"  Name="InputPhoneNumber"></TextBox>
                         </DockPanel>
-                        <DockPanel Height="15" Margin="0 10 0 0">
-                            <TextBlock MinWidth="100">E-Mail</TextBlock>
-                            <TextBox Name="InputEmail"></TextBox>
+                        <DockPanel Height="25" Margin="0 10 0 0">
+                            <TextBlock VerticalAlignment="Center" MinWidth="100">E-Mail</TextBlock>
+                            <TextBox VerticalAlignment="Center" Margin="1pt"  Name="InputEmail"></TextBox>
                         </DockPanel>
-                        <DockPanel Height="15" Margin="0 10 0 0">
-                            <TextBlock MinWidth="100">Position</TextBlock>
-                            <TextBox Name="InputPosition"></TextBox>
+                        <DockPanel Height="25" Margin="0 10 0 0">
+                            <TextBlock VerticalAlignment="Center" MinWidth="100">Position</TextBlock>
+                            <TextBox VerticalAlignment="Center" Margin="1pt"  Name="InputPosition"></TextBox>
                         </DockPanel>
-                        <DockPanel MinHeight="30" Margin="0 10 0 0">
-                            <TextBlock MinWidth="100">Eintrittsdatum</TextBlock>
-                            <DatePicker Name="InputCompanyEntry"></DatePicker>
+                        <DockPanel MinHeight="25" Margin="0 10 0 0">
+                            <TextBlock VerticalAlignment="Center" MinWidth="100">Eintrittsdatum</TextBlock>
+                            <DatePicker VerticalAlignment="Center" Margin="1pt" Name="InputCompanyEntry"></DatePicker>
                         </DockPanel>
-                        <DockPanel Height="15" Margin="0 10 0 0">
-                            <TextBlock MinWidth="100">Gehalt</TextBlock>
-                            <TextBox Name="InputSalary"></TextBox>
+                        <DockPanel Height="25" Margin="0 10 0 0">
+                            <TextBlock VerticalAlignment="Center" MinWidth="100">Gehalt</TextBlock>
+                            <TextBox VerticalAlignment="Center" Margin="1pt" Name="InputSalary"></TextBox>
                         </DockPanel>
-                        <DockPanel MinHeight="30" Margin="0 10 0 0">
+                        <DockPanel MinHeight="25" Margin="0 10 0 0">
                             <TextBlock MinWidth="100">Renteneintritt</TextBlock>
-                            <DatePicker Name="InputPensionStart"></DatePicker>
+                            <DatePicker VerticalAlignment="Center" Margin="1pt" Name="InputPensionStart"></DatePicker>
                         </DockPanel>
                         <Button Name="AddMemberButton" Click="OnClick_addMember" Visibility="Visible" Margin="0 25 0 0">Hinzufügen</Button>
                         <Button Name="SaveChangesButton" Click="OnCLick_saveChanges" Visibility="Collapsed" Margin="0 25 0 0">Speichern</Button>

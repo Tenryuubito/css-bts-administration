@@ -3,10 +3,10 @@ using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Media;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -21,11 +21,16 @@ namespace css_bts_administration
 
         private Employee? _employeeToEdit;
 
+        private string _placeholderText = "Suchen ...";
+
         public MainWindow()
         {
             InitializeComponent();
 
             ReloadEmployeeList();
+
+            searchInput.Text = _placeholderText;
+            searchInput.Foreground = Brushes.Gray;
         }
 
         private void OnClick_addNewMember(object sender, RoutedEventArgs e)
@@ -271,6 +276,25 @@ namespace css_bts_administration
         {
             ClearForm();
             ChangeFormState(FormState.ListEmployees);
+        }
+
+        private void OnLostFocus_fillPlaceholder(object sender, RoutedEventArgs e)
+        {
+            if (searchInput.Text == String.Empty)
+            {
+                searchInput.Text = _placeholderText;
+                searchInput.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void GotFocus_emptyBox(object sender, RoutedEventArgs e)
+        {
+            if (searchInput.Text == _placeholderText)
+            {
+                searchInput.Text = String.Empty;
+            }
+
+            searchInput.Foreground = Brushes.Black;
         }
     }
 }
