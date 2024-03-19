@@ -92,7 +92,7 @@ namespace css_bts_administration
 
             if (!ValidateEmployeeData(ref employee))
             {
-                MessageBox.Show("Validation failed!");
+                MessageBox.Show("Validierung fehlgeschlagen!");
                 return;
             }
 
@@ -221,7 +221,7 @@ namespace css_bts_administration
 
             if (_employeeToEdit == null)
             {
-                MessageBox.Show("You need to select an employee to edit.");
+                MessageBox.Show("Es muss ein Mitarbeiter zum Bearbeiten ausgewählt sein.");
                 return;
             }
 
